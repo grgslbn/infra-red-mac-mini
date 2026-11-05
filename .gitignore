@@ -1,0 +1,17 @@
+# --- SECRETS: written by `python -m tinytuya wizard`. Never commit. ---
+tinytuya.json
+devices.json
+snapshot.json
+tuya-raw.json
+*.local.toml
+
+# runtime
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+menubar/HeaterBar.app/
+
+# belt and braces: no JSON in this repo at all (secrets live in JSON)
+*.json
+dps_capture.txt

@@ -1,0 +1,64 @@
+# Office heater configuration. Code reads this on every run, so edits apply immediately.
+
+[device]
+devices_file = "devices.json"  # written by `tinytuya wizard`, relative to this folder. SECRET.
+name = ""                      # device name in devices.json; "" = first device
+ip = "192.168.1.76"            # from the wizard; give it a DHCP reservation in the router
+version = "3.4"               # protocol version (from the wizard scan)
+timeout = 2.0                  # seconds per network attempt
+retries = 3                    # attempts per command (exponential backoff)
+
+# Data-point mapping. Fill in with `heater map`, document in DPS.md.
+# Mapping from the wizard (Wonderwall Heater, category qn). See DPS.md.
+[dps]
+power = "1"          # bool
+target_temp = "2"    # int
+current_temp = "3"   # int (read-only)
+mode = ""            # this heater has no mode DP
+timer = "19"         # countdown_set: enum cancel / 1h ... 6h
+child_lock = ""      # this heater has none
+timer_left = "20"    # countdown_left: minutes remaining (read-only)
+temp_scale = 1       # raw value / temp_scale = °C  (some devices report 215 for 21.5)
+timer_unit = "enum" # hours | minutes | seconds | enum
+timer_enum_format = "{h}h"   # only for timer_unit = "enum", e.g. "{h}h" -> "2h"
+timer_enum_cancel = "cancel" # only for timer_unit = "enum"
+
+[comfort]
+default_temp = 21
+min_temp = 5
+max_temp = 30   # heater accepts 0-37
+
+# Preset buttons in the menu-bar app (label = °C)
+[presets]
+Eco = 18
+Comfort = 21
+Boost = 23
+
+[panel]
+timer_choices = [1, 2, 4]   # hours, shown as auto-off timer buttons
+
+[wake]
+# restore   = turn back on only if WE turned it off (sleep / idle)   <- recommended
+# always_on = turn on on every user wake (still respects manual off, if enabled)
+# never     = do nothing on wake
+action = "restore"
+respect_manual_off = true   # if you switched it off yourself today, don't re-enable on wake
+network_wait_seconds = 60   # how long to keep retrying after wake while Wi-Fi comes back
+
+[sleep]
+off_on_display_sleep = false  # also switch off when only the display sleeps
+
+[schedule]
+enabled = false               # true = never auto-ON outside these hours
+weekdays = [1, 2, 3, 4, 5]    # ISO weekday numbers, Mon = 1 ... Sun = 7
+start = "07:30"
+end = "19:00"
+off_outside_hours = false     # watchdog also switches it OFF outside hours
+
+[failsafe]
+safety_timer_hours = 4        # heater's own countdown, re-armed by the watchdog while you're around; 0 = off
+idle_off_minutes = 45         # watchdog switches off after this much keyboard/mouse inactivity; 0 = off
+watchdog_interval_seconds = 300
+
+[modes]
+names = []   # mode values shown in the menu bar, e.g. ["low", "high", "eco"] (from `heater map`)

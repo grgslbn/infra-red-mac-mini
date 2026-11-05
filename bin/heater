@@ -1,0 +1,10 @@
+#!/bin/bash
+# Entry point: resolves its own location so it works via symlink and from launchd.
+SRC="${BASH_SOURCE[0]}"
+while [ -L "$SRC" ]; do
+  DIR="$(cd -P "$(dirname "$SRC")" && pwd)"; SRC="$(readlink "$SRC")"
+  [[ $SRC != /* ]] && SRC="$DIR/$SRC"
+done
+ROOT="$(cd -P "$(dirname "$SRC")/.." && pwd)"
+cd "$ROOT" || exit 1
+exec "$ROOT/.venv/bin/python" -m heaterctl "$@"
