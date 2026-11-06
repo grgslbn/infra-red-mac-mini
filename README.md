@@ -66,4 +66,4 @@ Tests (offline, fake device): `.venv/bin/python -m unittest discover -s tests -v
 - If the safety timer expires (Mac gone), the watchdog will later see "off" and treat it as a manual
   off, so it won't auto-restart. That's deliberate (conservative).
 - The launchd agents point at this folder; if you move it, run `./uninstall.sh` first and `./install.sh` after.
-- Later: an M5Stack Cardputer heartbeat watchdog on the LAN (off if the Mac is gone > N min).
+- Planned work (ESP32 room sensor, Windows PC + Tapo P110, heartbeat fail-safe, tuning): see [ROADMAP.md](ROADMAP.md).
