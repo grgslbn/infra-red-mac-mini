@@ -6,7 +6,7 @@ No cloud calls at runtime.
 - **Sleep** → heater OFF immediately (synchronously, before Wi-Fi drops).
 - **User wake** (display wake, not Power Nap / dark wake) → heater back ON, but only if *we* switched it off,
   you didn't switch it off yourself today, and (optionally) it's working hours.
-- **Menu bar** (HeaterBar, native app): flame icon + `room → target` in the top bar. Left-click opens the
+- **Menu bar** (HeaterBar, native app): flame icon + `panel sensor → target` in the top bar. Left-click opens the
   panel (on/off switch, ±1 °C, Eco/Comfort/Boost presets, auto-off timer, automation status);
   right-click switches the heater on/off directly. Presets live in `config.toml` → `[presets]`.
   Prefer xbar? `./install.sh --xbar`.

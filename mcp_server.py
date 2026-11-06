@@ -29,7 +29,7 @@ def _run(fn):
 
 @mcp.tool()
 def heater_status() -> dict:
-    """Current power, room temperature, target temperature, mode and timer of the office heater."""
+    """Current power, panel sensor temperature (reads warmer than the room), target temperature, mode and timer of the office heater."""
     def f():
         st = Heater(load_config()).status()
         s = read_state()

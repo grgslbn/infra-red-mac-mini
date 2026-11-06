@@ -211,7 +211,8 @@ struct PanelView: View {
     @ViewBuilder func controls(_ p: Panel) -> some View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Room").font(.system(size: 11)).foregroundStyle(.secondary)
+                Text("Panel sensor").font(.system(size: 11)).foregroundStyle(.secondary)
+                    .help("Sensor sits above the panel, so it reads warmer than the room. The heater regulates on this value.")
                 Text(deg(p.current)).font(.system(size: 32, weight: .medium)).monospacedDigit()
             }
             Spacer()

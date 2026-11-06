@@ -33,7 +33,7 @@ def _timer_label(st, cfg) -> str | None:
 
 def _status_line(st, cfg=None) -> str:
     parts = [f"Power: {'ON' if st.power else 'OFF' if st.power is not None else '?'}",
-             f"Room: {_fmt_temp(st.current)}", f"Target: {_fmt_temp(st.target)}"]
+             f"Sensor: {_fmt_temp(st.current)}", f"Target: {_fmt_temp(st.target)}"]
     if st.mode is not None:
         parts.append(f"Mode: {st.mode}")
     tl = _timer_label(st, cfg or {"dps": {}})
